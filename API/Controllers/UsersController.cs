@@ -30,11 +30,11 @@ namespace API.Controllers
             return await _context.AppUsers.FindAsync(Id);
         }
         [HttpPost]
-        public async Task<string> PostUser(AppUser user)
+        public  string PostUser(AppUser user)
         {
             try
             {
-                await _context.AppUsers.AddAsync(user);
+                 _context.AppUsers.Add(user);
                 _context.SaveChangesAsync();
                 return "added";
             }

@@ -3,7 +3,8 @@
   
   "profiles": {
     
-    "https": {
+    "api": {
+      
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

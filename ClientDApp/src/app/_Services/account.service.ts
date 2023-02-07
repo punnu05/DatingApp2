@@ -8,8 +8,8 @@ import { user } from '../_Models/user';
 })
 export class AccountService {
   baseurl = 'https://localhost:5001/api/';
-  private currentUserSource= new BehaviorSubject<user | null>(null);
-  currentUser$ =this.currentUserSource.asObservable();
+  private currentUserSource = new BehaviorSubject<user | null>(null);
+  currentUser$ = this.currentUserSource.asObservable();
   constructor(private http: HttpClient) { }
 
   login(model: any) {
@@ -21,11 +21,24 @@ export class AccountService {
       }
     }));
   }
-setCurrentUser(user:user){
-  this.currentUserSource.next(user);
-}
+  register(model: any) {
+    return this.http.post<user>(this.baseurl + 'Account/Register', model)
+    .pipe(map(user => {
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+        this.currentUserSource.next(user);
+      }
+     // return user;
+    }
 
-  logout(){
+    ))
+  }
+
+  setCurrentUser(user: user) {
+    this.currentUserSource.next(user);
+  }
+
+  logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
   }

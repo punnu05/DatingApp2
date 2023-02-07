@@ -28,6 +28,8 @@ export class HomeComponent implements OnInit {
 registerToggle(){
   this.RegisterMode =!this.RegisterMode;
 }
-
+CancelRegisterMode(event:boolean){
+this.RegisterMode=event;
+}
 
 }
